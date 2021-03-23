@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commentaire index{% endblock %}
+
+{% block body %}
+    <h1>Commentaire index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>IdCom</th>
+                <th>Contenu</th>
+                <th>Date</th>
+                <th>Nbr_likes</th>
+                <th>Nbr_reclamation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commentaire in commentaires %}
+            <tr>
+                <td>{{ commentaire.id }}</td>
+                <td>{{ commentaire.idCom }}</td>
+                <td>{{ commentaire.Contenu }}</td>
+                <td>{{ commentaire.Date ? commentaire.Date|date('Y-m-d') : '' }}</td>
+                <td>{{ commentaire.nbrLikes }}</td>
+                <td>{{ commentaire.nbrReclamation }}</td>
+                <td>
+                    <a href="{{ path('commentaire_show', {'id': commentaire.id}) }}">show</a>
+                    <a href="{{ path('commentaire_edit', {'id': commentaire.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('commentaire_new') }}">Create new</a>
+{% endblock %}
